@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.CartDAO">
+	<insert id="insertCart" parameterType="cartVO">
+		insert into cart
+		values(#{user_no},#{item_cd},#{qty})
+	</insert>
+	<select id="dao.CartDAO.selectCart" parameterType="int" resultType="cartVO">
+		select c1.user_no,s1.item_cd,c1.qty,s1.price,s1.item_name,s1.img_url
+		  from cart c1
+		       join s_item s1 on s1.item_cd = c1.item_cd
+		 where user_no = #{int}
+	</select>
+	
+	<select id="dao.CartDAO.selectOneCart" parameterType="cartVO" resultType="cartVO">
+		select *
+		  from cart c1
+		       join s_item s1 on s1.item_cd = c1.item_cd
+		 where c1.user_no = #{user_no}
+		   and s1.item_cd = #{item_cd}
+	</select>
+	<select id="dao.CartDAO.selectOneCartInItem" parameterType="cartVO" resultType="cartVO">
+		select *
+		  from cart 
+		 where user_no = #{user_no}
+		   and item_cd = #{item_cd}
+	</select>
+	<select id="dao.CartDAO.selectQTY" parameterType="cartVO" resultType="int">
+		select qty
+		  from cart
+		 where user_no = #{user_no}
+		   and item_cd = #{item_cd}
+	</select>
+	<update id="dao.CartDAO.updateToItemQTY" parameterType="cartVO">
+		update cart
+		   set qty = #{qty}
+		 where user_no = #{user_no}
+		   and item_cd = #{item_cd}
+	</update>
+	<update id="dao.CartDAO.updateQuantity" parameterType="cartVO">
+		update cart
+		   set qty = #{qty}
+		 where user_no = #{user_no}
+		   and item_cd = #{item_cd}
+	</update>
+	<delete id="dao.CartDAO.deleteCartInItem" parameterType="cartVO">
+		delete from cart
+		 where user_no = #{user_no}
+		   and item_cd = #{item_cd}
+	</delete>
+	<delete id="dao.CartDAO.deleteAllCart" parameterType="int">
+		delete from cart
+		 where user_no = #{int}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

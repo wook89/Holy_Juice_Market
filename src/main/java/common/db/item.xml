@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="dao.ItemDAO">
+  	
+  	<select id="selectAllItem" resultType="itemVO">
+select item_cd, item_name,description,price,stock
+	  ,c1.category_name ,create_at,update_at,img_url
+      from s_item s1
+           join category c1 on c1.category_id = s1.category_id
+ ORDER BY ITEM_CD
+  	</select>
+  	<select id="selectAllJuice" resultType="itemVO">
+select item_cd, item_name,description,price,stock
+	  ,c1.category_name ,create_at,update_at,img_url
+      from s_item s1
+           join category c1 on c1.category_id = s1.category_id
+     where s1.category_id = 1
+     order by item_cd
+  	</select>
+	<select id="selectAllVape" resultType="itemVO">
+select item_cd, item_name,description,price,stock
+	  ,c1.category_name ,create_at,update_at,img_url
+      from s_item s1
+           join category c1 on c1.category_id = s1.category_id
+     where s1.category_id = 2
+     order by item_cd
+	</select>  	
+	<select id="selectAllPot" resultType="itemVO">
+
+select item_cd, item_name,description,price,stock
+	  ,c1.category_name ,create_at,update_at,img_url
+      from s_item s1
+           join category c1 on c1.category_id = s1.category_id
+     where s1.category_id = 3
+     order by item_cd
+ 
+	</select>
+	<select id="selectOneItem" parameterType="int" resultType="itemVO">
+		select *
+		  from s_item
+		 where item_cd = #{itemCode, jdbcType=INTEGER}	
+	</select>
+	<insert id="insertItem" parameterType="itemVO">
+		INSERT INTO S_ITEM
+		VALUES(item_cd_seq.nextval,#{item_name},#{description},#{price},
+			   #{stock},#{category_id}, DEFAULT, DEFAULT, #{img_url})
+	</insert>
+	<update id="updateItem" parameterType="itemVO">
+		update s_item
+		set item_name = #{item_name},
+			description = #{description},
+			price = #{price},
+			stock = #{stock},
+			category_id = #{category_id},
+			img_url = #{img_url}
+		 where item_cd = #{item_cd}
+	</update>
+	
+	<delete id="deleteItem" parameterType="int">
+		delete from s_item
+		 where item_cd = #{item_cd}
+	</delete>
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

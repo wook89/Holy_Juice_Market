@@ -1,0 +1,69 @@
+/* 개별 상품 카드 */
+.product-card {
+    flex: 1 1 calc(16.666% - 16px); /* 6개씩 배치: 100% ÷ 6 = 16.666% */
+    max-width: calc(16.666% - 16px); /* 최대 크기 고정 */
+    aspect-ratio: 1 / 1; /* 가로:세로 비율을 1:1로 설정 */
+    box-sizing: border-box; /* 패딩과 보더 포함 계산 */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* 상품 리스트 컨테이너 */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* 카드 hover 효과 */
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 상품 이름 스타일 */
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* 상품 설명 스타일 */
+.product-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+/* 상품 가격 스타일 */
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* 반응형: 태블릿 크기 (768px 이하) */
+@media (max-width: 768px) {
+    .product-card {
+        flex: 1 1 calc(33.333% - 16px); /* 한 줄에 3개 */
+        max-width: calc(33.333% - 16px);
+    }
+}
+
+/* 반응형: 모바일 크기 (480px 이하) */
+@media (max-width: 480px) {
+    .product-card {
+        flex: 1 1 calc(50% - 16px); /* 한 줄에 2개 */
+        max-width: calc(50% - 16px);
+    }
+}

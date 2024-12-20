@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="dao.DeliverDAO">
+  	
+  		<insert id="insertADDR" parameterType="deliveryVO">
+  			insert into delivery_address
+  			values(delivery_addr_no_seq.nextval,
+  				   #{user_no},#{addr},#{detail_addr},
+  				   #{postal_code},#{alias},default)
+  		</insert>
+  		<select id="selectToUserNo" parameterType="int" resultType="deliveryVO">
+  			select *
+  			  from delivery_address
+  			 where user_no = #{int}
+  		</select>
+  		<delete id="deleteADDR" parameterType="int">
+  			delete from delivery_address
+  			 where delivery_no = #{int}
+  		</delete>
+  		<update id="updateAllFalse" parameterType="int">
+  			update delivery_address
+  			   set is_default = 'F'
+  			 where user_no = #{int}
+  		</update>
+  		<update id="updateType" parameterType="int">
+  			update delivery_address
+  			   set is_default = 'T'
+  			 where delivery_no = #{int}
+  		</update>
+  </mapper>
