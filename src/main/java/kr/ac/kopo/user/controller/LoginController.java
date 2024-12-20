@@ -45,7 +45,7 @@ public class LoginController implements Controller {
 			session.setAttribute("cartSize", cartSize);
 			return "redirect:/item/list.do";
 		} else {
-			request.setAttribute("errmsg", "아이디 또는 비밀번호가 잘못되었습니다...");
+			request.setAttribute("errmsg", "아이디 또는 비밀번호가 잘못되었습니다.");
 			return "/jsp/user/loginForm.jsp";
 		}
 	}
