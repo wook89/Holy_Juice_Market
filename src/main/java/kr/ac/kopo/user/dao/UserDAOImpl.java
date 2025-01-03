@@ -23,7 +23,20 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public UserVO selectUser(LoginVO log) {
+		sqlSession.clearCache();
 		UserVO user = sqlSession.selectOne("dao.UserDAO.selectUser", log);
 		return user;
+	}
+
+	@Override
+	public UserVO selectOneUser(int user_no) {
+		sqlSession.clearCache();
+		return sqlSession.selectOne("dao.UserDAO.selectOneUser", user_no);
+	}
+
+	@Override
+	public void updateUserInfo(UserVO user) {
+		sqlSession.update("dao.UserDAO.updateUserInfo",user);
+		sqlSession.commit();
 	}
 }

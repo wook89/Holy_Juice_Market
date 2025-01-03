@@ -31,23 +31,22 @@ public class LoginController implements Controller {
 		String pw = request.getParameter("login_pw");
 		LoginVO log = new LoginVO(id, pw);
 		UserVO user = userService.login(log);
-		int user_no = user.getUser_no();
-		int totalQTY = 0;
-		List<CartVO> cartList = cartService.selectCart(user_no);
-		int cartSize = cartList.size();
-		List<DeliveryVO> deliveryList = deliverService.selectToUserNo(user_no);
-		for(CartVO cartvo : cartList) {
-			totalQTY += cartvo.getQty();
-		}
+		//List<DeliveryVO> deliveryList = deliverService.selectToUserNo(user_no);
+		
 		if (user != null) {
+			int user_no = user.getUser_no();
+			String user_type = user.getType();
+			List<CartVO> cartList = cartService.selectCart(user_no);
+			int cartSize = cartList.size();
 			HttpSession session = request.getSession();
 			session.setAttribute("user_no", user_no);
 			session.setAttribute("cartSize", cartSize);
+			session.setAttribute("type", user_type);
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+user_type);
 			return "redirect:/item/list.do";
 		} else {
 			request.setAttribute("errmsg", "아이디 또는 비밀번호가 잘못되었습니다..");
 			return "/jsp/user/loginForm.jsp";
 		}
 	}
-
 }

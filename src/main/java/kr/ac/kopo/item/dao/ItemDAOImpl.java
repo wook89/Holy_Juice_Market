@@ -1,6 +1,7 @@
 package kr.ac.kopo.item.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -71,8 +72,27 @@ public class ItemDAOImpl implements ItemDAO{
 
 	@Override
 	public ItemVO selectOne(int item_cd) throws Exception {
-		ItemVO item = sqlSession.selectOne("selectOneItem",item_cd);
+		ItemVO item = sqlSession.selectOne("dao.ItemDAO.selectOneItem",item_cd);
 		return item;
 	}
+
+	@Override
+	public List<ItemVO> selectBestList() {
+		sqlSession.clearCache();
+		List<ItemVO> itemList = sqlSession.selectList("dao.ItemDAO.selectBestList");
+		return itemList;
+	}
+	
+	@Override
+    public int countItems() {
+		sqlSession.clearCache();
+		return sqlSession.selectOne("dao.ItemDAO.countItems");
+    }
+
+    @Override
+    public List<ItemVO> selectItemsByPage(int offset, int limit) {
+    	sqlSession.clearCache();
+        return sqlSession.selectList("dao.ItemDAO.selectItemsByPage", Map.of("offset", offset, "limit", limit));
+    }
 
 }

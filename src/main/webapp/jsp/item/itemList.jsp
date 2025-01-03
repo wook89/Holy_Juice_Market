@@ -23,6 +23,7 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/Holy_Juice_Market/resources/css/product.css?v=1.0">
+<link rel="stylesheet" href="/Holy_Juice_Market/resources/css/Pagenation.css">
 <link href="css/custom.css" rel="stylesheet">
 <script src="/Holy_Juice_Market/resources/js/jquery-3.7.1.min.js"></script>
 <script>
@@ -75,23 +76,39 @@ function handleClick(element) {
 	</header>
 
 <section>
-	<h>상품 목록 서비스</h>
-	<div class="product-list">
-			<c:forEach items="${ itemList }" var="itemVO">
-				<div class="product-card" data-item-cd="${ itemVO.item_cd }" onclick="handleClick(this)">
-					<!-- 상품 이미지 -->
-					<img class="product-image" src="${ itemVO.img_url }"
-						alt="${ itemVO.item_name }"
-						style="max-width: 200px; max-height: 200px; object-fit: cover;" />
-					<!-- 상품 이름 -->
-					<h3 class="product-name">${ itemVO.item_name }</h3>
-					<!-- 상품 설명 -->
-					<p class="product-description">${ itemVO.description }</p>
-					<!-- 상품 가격 -->
-					<p class="product-price">${ itemVO.price }원</p>
-				</div>
-			</c:forEach>
-		</div>
+    <div class="product-list">
+        <c:forEach items="${ itemList }" var="itemVO">
+            <div class="product-card" data-item-cd="${ itemVO.item_cd }" onclick="handleClick(this)">
+                <!-- 상품 이미지 -->
+                <img class="product-image" src="${ itemVO.img_url }"
+                    alt="${ itemVO.item_name }"
+                    style="max-width: 200px; max-height: 200px; object-fit: cover;" />
+                <!-- 상품 이름 -->
+                <h3 class="product-name">${ itemVO.item_name }</h3>
+                <!-- 상품 설명 -->
+                <p class="product-description">${ itemVO.description }</p>
+                <!-- 상품 가격 -->
+                <p class="product-price">${ itemVO.price }원</p>
+            </div>
+        </c:forEach>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <c:if test="${ currentPage > 1 }">
+            <a href="?page=${ currentPage - 1 }" class="page-link">이전</a>
+        </c:if>
+
+        <c:forEach begin="1" end="${ totalPages }" var="page">
+            <a href="?page=${ page }" class="page-link ${ currentPage == page ? 'active' : '' }">
+                ${ page }
+            </a>
+        </c:forEach>
+
+        <c:if test="${ currentPage < totalPages }">
+            <a href="?page=${ currentPage + 1 }" class="page-link">다음</a>
+        </c:if>
+    </div>
 </section>
 
 <footer>

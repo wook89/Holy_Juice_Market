@@ -57,4 +57,19 @@ public class ItemService {
 		return item;
 	}
 
+	public List<ItemVO> selectBestList() {
+		List<ItemVO> itemList = itemDao.selectBestList();
+		return itemList;
+	}
+	
+	// 전체 아이템 수 반환
+    public int getTotalItems() {
+        return itemDao.countItems();
+    }
+
+    // 특정 범위의 아이템 반환
+    public List<ItemVO> selectItemsByPage(int startRow, int endRow) {
+        return itemDao.selectItemsByPage(startRow, endRow);
+    }
+
 }

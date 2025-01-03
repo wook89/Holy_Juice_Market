@@ -27,13 +27,15 @@ public class AddToDeliverController implements Controller {
 		String postal_code = request.getParameter("postal_code");
 		DeliveryVO deliverVO = new DeliveryVO(user_no, addr, detail_addr, postal_code, alias);
 		
+		List<DeliveryVO> BaseList = deliverService.selectToUserNo(user_no);
+		if(BaseList.size() < 5) {
+		deliverService.updateAllFalse(user_no);//is_default값 전부 F 로 초기화
+		deliverService.insertADDR(deliverVO);// 새로운 배송지 등록하면서 is_default값 T 로 초기화 하기때문
 		List<DeliveryVO> deliveryList = deliverService.selectToUserNo(user_no);
-		if(deliveryList.size() < 5) {
-		deliverService.insertADDR(deliverVO);
 		request.setAttribute("deliveryList", deliveryList);
 		return "redirect:/user/myPageForm.do";
 		}else {
-			request.setAttribute("deliveryList", deliveryList);
+			request.setAttribute("deliveryList", BaseList);
 			return "redirect:/user/myPageForm.do?message=1";
 		}
 		

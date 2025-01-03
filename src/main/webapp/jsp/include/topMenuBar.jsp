@@ -5,19 +5,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%
+if (session.getAttribute("user_no") == null) {
 
-	if(session.getAttribute("user_no") == null){
-	
-	}else{
-		int user_no = (int)session.getAttribute("user_no");
-		%>
-		
+} else {
+	int user_no = (int) session.getAttribute("user_no");
+%>
+
 <script>
 
-const sessionUserNo = "<%= user_no %>";
+const sessionUserNo = "<%=user_no%>";
 console.log("Session User No: ", sessionUserNo);
 $(document).ready(function(){
-    const userNo = "<%= user_no %>";
+    const userNo = "<%=user_no%>";
 
     fetch('/Holy_Juice_Market/include/topMenuBar.do', {
         method: 'POST',
@@ -43,8 +42,8 @@ $(document).ready(function(){
 
 </script>
 
-<%		
-	}
+<%
+}
 %>
 <script>
 function alertMSG(msg){
@@ -52,43 +51,52 @@ function alertMSG(msg){
 }
 </script>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 120px;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+	style="height: 120px;">
 	<a href="/Holy_Juice_Market/index.jsp"> <img
-				src="/Holy_Juice_Market/resources/image/holy_juice.png"style="height: 120px;">
-		</a>
-    <div class="container">
-        <a class="navbar-brand" href="/Holy_Juice_Market/item/list.do">Home</a>
-        <a class="navbar-brand" href="/Holy_Juice_Market/item/bestList.do">월간베스트</a>
-        <a class="navbar-brand" href="/Holy_Juice_Market/item/juiceList.do">액상</a>
-        <a class="navbar-brand" href="/Holy_Juice_Market/item/vapeList.do">기기</a>
-        <a class="navbar-brand" href="/Holy_Juice_Market/item/potList.do">팟</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="">문의&답변</a></li>
-                <c:choose>
-				<c:when test="${ empty user_no }">
-					<li class="nav-item"><a class="nav-link" href="/Holy_Juice_Market/user/joinForm.do">회원가입</a></li>
-					<li class="nav-item"><a class="nav-link" href="/Holy_Juice_Market/user/loginForm.do">LogIn</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="nav-item"><a class="nav-link" href="/Holy_Juice_Market/user/myPageForm.do">MyPage</a></li>
-					<li class="nav-item"><a class="nav-link" href="">LogOut</a></li>
-					<li class="nav-item">
+		src="/Holy_Juice_Market/resources/image/holy_juice.png"
+		style="height: 120px;">
+	</a>
+	<div class="container">
+		<a class="navbar-brand" href="/Holy_Juice_Market/item/list.do">Home</a>
+		<a class="navbar-brand" href="/Holy_Juice_Market/item/bestList.do">월간베스트</a>
+		<a class="navbar-brand" href="/Holy_Juice_Market/item/juiceList.do">액상</a>
+		<a class="navbar-brand" href="/Holy_Juice_Market/item/vapeList.do">기기</a>
+		<a class="navbar-brand" href="/Holy_Juice_Market/item/potList.do">팟</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item"><a class="nav-link" href="/Holy_Juice_Market/inquiry/inquiryBoard.do">문의&답변</a></li>
+				<c:choose>
+					<c:when test="${ empty user_no }">
+						<li class="nav-item"><a class="nav-link"
+							href="/Holy_Juice_Market/user/joinForm.do">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/Holy_Juice_Market/user/loginForm.do">LogIn</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link"
+							href="/Holy_Juice_Market/user/myPageForm.do">MyPage</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/Holy_Juice_Market/user/logout.do">LogOut</a></li>
+						<li class="nav-item"><c:choose>
+								<c:when test="${cartSize eq 0}">
+									<a class="nav-link" id="myCart" href="javascript:void(0);"
+										onclick="alertMSG('장바구니가 비어있습니다.');">Cart</a>
+								</c:when>
+								<c:otherwise>
+									<a class="nav-link" id="myCart"
+										href="/Holy_Juice_Market/cart/cartItem.do">Cart</a>
+								</c:otherwise>
+							</c:choose></li>
+
 						<c:choose>
-							<c:when test="${cartSize eq 0}">
-								<a class="nav-link" id="myCart" href="javascript:void(0);" onclick="alertMSG('장바구니가 비어있습니다.');">Cart</a>
+							<c:when test="${ type eq 'S' }">
+								<a href="/Holy_Juice_Market/admin/management.do"><button>관리자페이지</button></a>
 							</c:when>
-							<c:otherwise>
-								<a class="nav-link" id="myCart" href="/Holy_Juice_Market/cart/cartItem.do">Cart</a>
-							</c:otherwise>
 						</c:choose>
-					</li>
-				</c:otherwise>
-			</c:choose>
-			<a href="/Holy_Juice_Market/admin/management.do"><button>관리자페이지</button></a>
-			
-            </ul>
-        </div>
-    </div>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</div>
 </nav>
-		

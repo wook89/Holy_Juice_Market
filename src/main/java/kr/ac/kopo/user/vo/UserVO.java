@@ -22,6 +22,15 @@ public class UserVO {
 		this.email = email;
 		this.phone = phone;
 	}
+	
+	public UserVO(int user_no,String user_id, String password, String user_name, String email, String phone) {
+		this.user_no = user_no;
+		this.user_id = user_id;
+		this.password = password;
+		this.user_name = user_name;
+		this.email = email;
+		this.phone = phone;
+	}
 
 
 	public UserVO(int user_no, String user_id, String user_name, String email, String password, String phone, String type) {

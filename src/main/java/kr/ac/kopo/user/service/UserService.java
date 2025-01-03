@@ -19,5 +19,11 @@ public class UserService {
 		UserVO user = userDao.selectUser(log);
 		return user;
 	}
+	public UserVO selectOneUser(int user_no) {
+		return userDao.selectOneUser(user_no);
+	}
+	public void updateUserInfo(UserVO user) {
+		userDao.updateUserInfo(user);
+	}
 
 }

@@ -43,6 +43,24 @@ select item_cd, item_name,description,price,stock
 		  from s_item
 		 where item_cd = #{itemCode, jdbcType=INTEGER}	
 	</select>
+	<select id="selectBestList" resultType="itemVO">
+		SELECT *
+		  FROM(
+		      SELECT S1.ITEM_CD,
+		                   S1.ITEM_NAME,
+		                   S1.DESCRIPTION,
+		                   S1.PRICE,
+		                   S1.IMG_URL,
+		                   SUM(S2.QTY) AS SUM_QTY
+		              FROM S_ITEM S1
+		                   JOIN S_ORDER S2 ON S2.ITEM_CD = S1.ITEM_CD
+		             GROUP BY S1.ITEM_CD,S1.ITEM_NAME,S1.DESCRIPTION,
+		                   S1.PRICE,S1.IMG_URL      
+		             ORDER BY SUM_QTY DESC  
+		      )
+		 WHERE ROWNUM &lt;= 6 
+	</select>
+	
 	<insert id="insertItem" parameterType="itemVO">
 		INSERT INTO S_ITEM
 		VALUES(item_cd_seq.nextval,#{item_name},#{description},#{price},
@@ -63,6 +81,19 @@ select item_cd, item_name,description,price,stock
 		delete from s_item
 		 where item_cd = #{item_cd}
 	</delete>
+	
+	    <!-- 전체 아이템 수 조회 -->
+    <select id="countItems" resultType="int">
+        SELECT COUNT(*) FROM s_item
+    </select>
+
+    <!-- 페이징 처리된 아이템 리스트 조회 -->
+    <select id="selectItemsByPage" resultType="itemVO">
+        SELECT *
+        FROM s_item
+        ORDER BY ITEM_CD DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+    </select>
   </mapper>
   
   

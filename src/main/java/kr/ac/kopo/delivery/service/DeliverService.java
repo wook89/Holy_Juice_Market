@@ -33,4 +33,8 @@ public class DeliverService {
 	public void updateAllFalse(int user_no) {
 		deliverDao.updateAllFalse(user_no);
 	}
+
+	public DeliveryVO selectBase(int user_no) {
+		return deliverDao.selectBase(user_no);
+	}
 }

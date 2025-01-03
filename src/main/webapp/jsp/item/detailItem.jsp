@@ -15,7 +15,7 @@
     <script >
     function addToOrder(user_no,item_cd){//구매하기
     	const quantity = document.getElementById("quantity-input");
-	   	location.href=`/Holy_Juice_Market/order/orderForm.do?item_cd=${"${item_cd}"}&user_no=${"${user_no}"}&quantity=${"${quantity.value}"}`
+	   	location.href=`/Holy_Juice_Market/order/orderForm.do?item_cd=${"${item_cd}"}&quantity=${"${quantity.value}"}`
     	
     }
     function addToCart(user_no,item_cd){//장바구니 담기

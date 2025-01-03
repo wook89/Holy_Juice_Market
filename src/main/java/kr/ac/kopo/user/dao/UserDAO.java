@@ -9,4 +9,7 @@ public interface UserDAO{
 
 	UserVO selectUser(LoginVO log);
 
+	UserVO selectOneUser(int user_no);
+
+	void updateUserInfo(UserVO user);
 }

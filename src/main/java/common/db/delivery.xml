@@ -8,12 +8,18 @@
   			insert into delivery_address
   			values(delivery_addr_no_seq.nextval,
   				   #{user_no},#{addr},#{detail_addr},
-  				   #{postal_code},#{alias},default)
+  				   #{postal_code},#{alias},'T')
   		</insert>
   		<select id="selectToUserNo" parameterType="int" resultType="deliveryVO">
   			select *
   			  from delivery_address
   			 where user_no = #{int}
+  		</select>
+  		<select id="selectBase" parameterType="int" resultType="deliveryVO">
+  			select *
+  			  from delivery_address
+  			 where user_no = #{int}
+  			   and is_default = 'T'
   		</select>
   		<delete id="deleteADDR" parameterType="int">
   			delete from delivery_address

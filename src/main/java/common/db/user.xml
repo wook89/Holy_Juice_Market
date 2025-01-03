@@ -18,7 +18,19 @@ select *
  where user_id = #{log_id}
    and password = #{log_pw}
 </select>
-
+<select id="selectOneUser" parameterType="int" resultType="UserVO">
+select *
+  from users
+ where user_no = #{int}
+</select>
+<update id="updateUserInfo" parameterType="UserVO">
+	update users
+	   set password = #{password},
+	       user_name = #{user_name},
+	       email = #{email},
+	       phone = #{phone}
+	 where user_no = #{user_no}
+</update>
 	
 
 

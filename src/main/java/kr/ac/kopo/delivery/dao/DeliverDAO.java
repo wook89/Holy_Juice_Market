@@ -15,5 +15,7 @@ public interface DeliverDAO {
 	void updateType(int d_no);
 
 	void updateAllFalse(int user_no);
+
+	DeliveryVO selectBase(int user_no);
 	
 }

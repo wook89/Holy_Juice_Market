@@ -16,7 +16,8 @@
 	 <!-- Custom CSS (Optional) -->
     <link href="css/custom.css" rel="stylesheet">
 <link rel="stylesheet" href="/Holy_Juice_Market/resources/css/product.css?v=1.0">
-<link rel="stylesheet" href="/Holy_Juice_Market/resources/css/paging.css?v=1.0">
+<link rel="stylesheet" href="/Holy_Juice_Market/resources/css/Pagenation.css">
+<link rel="stylesheet" href="/Holy_Juice_Market/resources/css/footer.css?v=1.0">
 <script src="/Holy_Juice_Market/resources/js/jquery-3.7.1.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -59,6 +60,23 @@
 		</div>
 
 	</section>
+	
+	<div class="pagination">
+    <c:if test="${currentPage > 1}">
+        <a href="?page=${currentPage - 1}" class="page-link">이전</a>
+    </c:if>
+
+    <c:forEach begin="1" end="${totalPages}" var="page">
+        <a href="?page=${page}" class="page-link ${currentPage == page ? 'active' : ''}">
+            ${page}
+        </a>
+    </c:forEach>
+
+    <c:if test="${currentPage < totalPages}">
+        <a href="?page=${currentPage + 1}" class="page-link">다음</a>
+    </c:if>
+</div>
+	
 	<footer>
 		<jsp:include page="/jsp/include/footer.jsp" />
 	</footer>

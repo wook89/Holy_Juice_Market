@@ -40,4 +40,9 @@ public class DeliverDAOImpl implements DeliverDAO {
 		sqlSession.update("dao.DeliverDAO.updateAllFalse",user_no);
 		sqlSession.commit();
 	}
+	@Override
+	public DeliveryVO selectBase(int user_no) {
+		sqlSession.clearCache();
+		return sqlSession.selectOne("dao.DeliverDAO.selectBase",user_no);
+	}
 }

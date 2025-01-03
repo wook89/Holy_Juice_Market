@@ -107,17 +107,7 @@ function updateQuantity(action,item_cd,item_name) {
 
 
 function order(){
-	
-	const selectedRadio = document.querySelector('input[name="selectedAddress"]:checked');
-	alert(selectedRadio.id)
-	alert(`${"${cartList}"}`)
-	
-    const label = document.querySelector(`label[for=${"${selectedRadio.id}"}]`);
-    const labelText = label ? label.innerText : "알 수 없는 주소";
-    document.getElementById('hiddenAddressName').value = labelText;
-    // 폼 제출
-    document.getElementById('deliveryForm').submit();
-	   /* 	location.href=`/Holy_Juice_Market/order/order.do` */
+	location.href="/Holy_Juice_Market/order/cartOrder.do"
    }
 
 </script>
@@ -157,9 +147,8 @@ function order(){
 					<h3>합계 :</h3> <h3 id="totalPrice">${totalPrice}원</h3>
 				</div><br>
 				<div style="display: flex; justify-content: center; margin-right:10px;">
-					<a onclick="order()"><button>결제</button></a>
+					<a onclick="order();"><button>결제</button></a>
 				</div>
-				</form>
 				
 		</div>
 	</section>

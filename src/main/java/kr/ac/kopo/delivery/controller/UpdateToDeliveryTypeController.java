@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.controller.Controller;
 import kr.ac.kopo.delivery.service.DeliverService;
+import kr.ac.kopo.delivery.vo.DeliveryVO;
 
 public class UpdateToDeliveryTypeController implements Controller {
 	private DeliverService deliveryService;

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.cart.service.CartService;
 import kr.ac.kopo.cart.vo.CartVO;
 import kr.ac.kopo.controller.Controller;
+import kr.ac.kopo.delivery.service.DeliverService;
 import kr.ac.kopo.delivery.vo.DeliveryVO;
 import kr.ac.kopo.item.service.ItemService;
 import kr.ac.kopo.item.vo.ItemVO;
@@ -17,47 +18,33 @@ import kr.ac.kopo.user.vo.UserVO;
 
 public class OrderController implements Controller {
 	private OrderService orderService;
-	private CartService cartService;
 	private ItemService itemService;
+	private DeliverService deliveryService;
+	
 
 	public OrderController() {
 		orderService = new OrderService();
-		cartService = new CartService();
+		itemService = new ItemService();
+		deliveryService = new DeliverService();
 	}
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		List<DeliveryVO> deliveryList = (List<DeliveryVO>) session.getAttribute("deliveryList");
-		List<CartVO> cartList = (List<CartVO>) session.getAttribute("cartList");
-		List<OrderVO> orderList = (List<OrderVO>) session.getAttribute("orderList");
-		UserVO user = (UserVO) session.getAttribute("user");
-		int addr = Integer.parseInt(request.getParameter("selectedAddress"));
-		if(orderList == null || orderList.size() == 0 ) {
-		int user_no = user.getUser_no();
+		int item_cd = Integer.parseInt(request.getParameter("item_cd"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		int user_no = (int)session.getAttribute("user_no");
+		DeliveryVO deliVO = deliveryService.selectBase(user_no);
+		int addr = deliVO.getDelivery_no();
 		
-		for (int i = 0; i < cartList.size(); i++) {
-			cartList.get(i).setDelivery_no(addr);
-			cartList.get(i).setLine_no(i+1);
-		}
-		/*
-		 * int item_cd = cartList.get(0).getItem_cd(); int order_qty =
-		 * cartList.get(0).getQty(); ItemVO item = itemService.selectOneItem(item_cd);
-		 * item.setStock(item.getStock()-order_qty); itemService.updateStock(item);
-		 */
-			orderService.insertFirst(cartList.get(0));
-		for (int i = 1; i < cartList.size(); i++) {
-			orderService.insertAfter(cartList.get(i));
-		}
-			cartService.deleteAllCart(user_no);
-			//session.removeAttribute("cartList");
-		}else {
+		  ItemVO item = itemService.selectOneItem(item_cd);//해당 아이템의 이미지,상품명,가격의 속성값을 추출하기위해 
+		  List<OrderVO> orderList = List.of(new OrderVO( user_no,item_cd,
+		  quantity, item.getImg_url(),item.getItem_name(),item.getPrice()));
+		 
 			orderList.get(0).setDelivery_no(addr);
 			orderList.get(0).setLine_no(1);
 			
 			orderService.insertOne(orderList.get(0));
-			session.removeAttribute("orderList");
-		}
 		/*
 		 * (usre, item, qty) Sqlsession.insert("nameSpace.firstInsert");
 		 * 
