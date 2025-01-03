@@ -93,8 +93,8 @@
 	<div id="form">
 		<h2>로그인</h2>
 		<form action="/Holy_Juice_Market/user/login.do" method="post">
-			<br> 아이디 &nbsp; &nbsp;: <input type="text" name="login_id" required="required">
-			<br> 비밀번호 &nbsp; &nbsp;: <input type="password" name="login_pw" required="required">
+			<br> 아이디 <input type="text" name="login_id" required="required">
+			<br> 비밀번호 <input type="password" name="login_pw" required="required">
 			<br> 
 			<br>
 			<button type="submit">로그인</button>

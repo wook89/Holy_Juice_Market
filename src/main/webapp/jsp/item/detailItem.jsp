@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	 <!-- Custom CSS (Optional) -->
     <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Holy_Juice_Market/resources/css/footer.css?v=1.0">
     <script src="/Holy_Juice_Market/resources/js/jquery-3.7.1.min.js"></script>
     <script >
     function addToOrder(user_no,item_cd){//구매하기

@@ -86,11 +86,11 @@
 	<div id="form">
 		<h2>회원 가입</h2>
 		<form action="/Holy_Juice_Market/user/join.do" method="post">
-			<br> 아이디 &nbsp; &nbsp;: <input type="text" name="user_id" required="required">
-			<br> 비밀번호 &nbsp; &nbsp;: <input type="password" name="password" required="required">
-			<br> 이름 &nbsp; &nbsp;: <input type="text" name="user_name" required="required">
-			<br> Email &nbsp; &nbsp; &nbsp;: <input type="text" name="email" required="required"><br>
-			<br> 전화번호 &nbsp; &nbsp; &nbsp;: <input type="text" name="phone" required="required"><br>
+			<br> 아이디  <input type="text" name="user_id" required="required">
+			<br> 비밀번호  <input type="password" name="password" required="required">
+			<br> 이름  <input type="text" name="user_name" required="required">
+			<br> Email  <input type="text" name="email" required="required">
+			<br> 전화번호  <input type="text" name="phone" required="required">
 			<br> 
 			<br>
 			<button type="submit">가입</button>

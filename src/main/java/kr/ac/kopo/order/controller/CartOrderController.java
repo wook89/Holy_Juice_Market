@@ -28,6 +28,7 @@ public class CartOrderController implements Controller {
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		int user_no = (int)session.getAttribute("user_no");
+		System.out.println(user_no);
 		DeliveryVO deliVO = deliveryService.selectBase(user_no);
 		int addr = deliVO.getDelivery_no();
 		
