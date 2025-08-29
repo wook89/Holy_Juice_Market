@@ -4,6 +4,7 @@
 
 ### 프로젝트명
 HolyJuiceMarket
+
 [![Watch the video](https://img.youtube.com/vi/ThEH3aA_jf0/0.jpg)](https://www.youtube.com/watch?v=ThEH3aA_jf0)
 ### 목적
 기존 MVC1 방식으로 설계된 콘솔 프로젝트를 MVC2 방식으로 전환하여 웹 프로젝트로 구현하고, 이를 Forward 방식과 MyBatis를 활용하여 개발함으로써 학습을 목적으로 합니다.
